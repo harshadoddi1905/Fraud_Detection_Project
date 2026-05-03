@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+from sklearn.linear_model import LogisticRegression
 
 print("FRAUD DETECTION PROJECT")
 
@@ -38,13 +39,20 @@ X = df[features]
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
+# Logistic Regression Model
+lr_model = LogisticRegression(class_weight='balanced')
+lr_model.fit(X_scaled, df['is_fraud'])
+
+df['lr_prob'] = lr_model.predict_proba(X_scaled)[:,1]
+
+df['lr_pred'] = (df['lr_prob'] > 0.8).astype(int)
+
 
 # MODEL 
-model = IsolationForest(contamination=0.02, random_state=42)
+model = IsolationForest(n_estimators=200, contamination=0.05, random_state=42)
 df['anomaly'] = model.fit_predict(X_scaled)
 
-# Convert to fraud label
-df['predicted_fraud'] = df['anomaly'].map({-1:1, 1:0})
+
 
 # RISK SCORE 
 df['risk_score'] = model.decision_function(X_scaled)
@@ -52,15 +60,43 @@ df['risk_score'] = model.decision_function(X_scaled)
 # Lower score = more risky
 df['risk_score'] = -df['risk_score']
 
+
+# Normalize risk score (0 to 1)
+df['risk_score'] = (df['risk_score'] - df['risk_score'].min()) / (df['risk_score'].max() - df['risk_score'].min())
+
+# Set threshold (you can tune this)
+threshold = 0.7
+
+# New fraud prediction based on risk score
+df['predicted_fraud'] = (df['risk_score'] > threshold).astype(int)
 # EVALUATION 
 print("\nMODEL PERFORMANCE:")
 
-print("\nClassification Report:")
+#print("\nClassification Report:")
+#print(classification_report(df['is_fraud'], df['predicted_fraud']))
+print("\nISOLATION FOREST PERFORMANCE:")
 print(classification_report(df['is_fraud'], df['predicted_fraud']))
 
-cm = confusion_matrix(df['is_fraud'], df['predicted_fraud'])
+print("\nLOGISTIC REGRESSION PERFORMANCE:")
+print(classification_report(df['is_fraud'], df['lr_pred']))
+
+cm = confusion_matrix(df['is_fraud'], df['lr_pred'])
 print("\nConfusion Matrix:")
 print(cm)
+
+# ROC Curve
+fpr, tpr, _ = roc_curve(df['is_fraud'], df['risk_score'])
+roc_auc = auc(fpr, tpr)
+
+plt.figure()
+plt.plot(fpr, tpr, label=f"AUC = {roc_auc:.2f}")
+plt.plot([0, 1], [0, 1], linestyle='--')
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.legend()
+plt.savefig("dashboard/roc_curve.png")
+plt.close()
 
 # VISUALIZATION
 
