@@ -33,10 +33,6 @@ Confusion Matrix:
 ```
 
 
-# Key Insight
-
-Lower thresholds increased fraud detection but caused too many false positives.
-Threshold = 0.8 provided the best trade-off for practical use.
 
 
 # Tools & Technologies
