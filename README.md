@@ -63,6 +63,8 @@ Fraud_Detection_Project/
 │   ├── fraud_distribution.png
 │   └── risk_score.png
 ├── README.md
+```
+
 
 ##  How to Run
 
