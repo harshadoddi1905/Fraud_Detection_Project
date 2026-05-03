@@ -2,7 +2,7 @@
 
 # Project Overview
 
-This project detects fraudulent transactions using both:
+This project focuses on detecting fraudulent transactions using both:
 
 * Isolation Forest (unsupervised anomaly detection)
 * Logistic Regression (supervised classification)
@@ -18,15 +18,19 @@ The dataset is highly imbalanced (~1.5% fraud), so the focus is on optimizing pr
 * Threshold tuning to balance fraud detection vs false positives
 
 
-# Final Results (Logistic Regression - Threshold = 0.8)
+## Final Results (Logistic Regression - Threshold = 0.8)
 
 * Precision (Fraud): **0.13**
 * Recall (Fraud): **0.40**
 * F1 Score: **0.19**
 
+
+
+```
 Confusion Matrix:
-[[9435  414]
- [  91   60]]
+[[9435 414]
+ [ 91  60]]
+```
 
 
 # Key Insight
@@ -60,6 +64,35 @@ Fraud_Detection_Project/
 │   └── risk_score.png
 ├── README.md
 
+##  How to Run
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/harshadoddi1905/Fraud_Detection_Project.git
+```
+
+2. Navigate to the folder:
+
+```bash
+cd Fraud_Detection_Project
+```
+
+3. Install dependencies:
+
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn
+```
+
+4. Run the script:
+
+```bash
+python scripts/fraud_detection.py
+```
+
+---
+
+
 
 
 ## Key Features
@@ -73,10 +106,17 @@ Fraud_Detection_Project/
 
 
 
-## Model Used
-* **Isolation Forest (Unsupervised Learning)**
-  * Detects anomalies based on data distribution
-  * Works well for imbalanced datasets
+## Models Used
+
+### 1. Isolation Forest (Unsupervised Learning)
+* Detects anomalies based on data distribution
+* Works well for imbalanced datasets
+* Used to generate risk scores for transactions
+
+### 2. Logistic Regression (Supervised Learning)
+* Used for binary classification (fraud vs non-fraud)
+* Applied with class balancing to handle imbalanced data
+* Threshold tuning used to improve recall
 
 
 
@@ -91,9 +131,9 @@ Fraud detection is an imbalanced problem, so recall is more important than accur
 
 
 ## Visualizations
-### 🔹 Fraud Distribution
+###  Fraud Distribution
 ![Fraud Distribution](dashboard/fraud_distribution.png)
-### 🔹 Risk Score Distribution
+###  Risk Score Distribution
 ![Risk Score](dashboard/risk_score.png)
 
 
@@ -106,27 +146,6 @@ Fraud detection is an imbalanced problem, so recall is more important than accur
 
 
 
-## How to Run
-1. Clone the repository:
-```
-git clone https://github.com/yourusername/fraud-detection-project.git
-```
-
-2. Navigate to the folder:
-```
-cd Fraud_Detection_Project
-```
-
-3. Install dependencies:
-```
-pip install pandas numpy matplotlib seaborn scikit-learn
-```
-
-4. Run the script:
-```
-python scripts/fraud_detection.py
-```
-
 
 
 ## Output
@@ -136,10 +155,10 @@ python scripts/fraud_detection.py
 
 
 ## Future Improvements
-- Implement advanced models (Random Forest, XGBoost)
-- Perform hyperparameter tuning for better accuracy
-- Build real-time fraud detection system
-- Develop interactive dashboard using Streamlit or Power BI
+* Implement advanced models (Random Forest, XGBoost)
+* Perform hyperparameter tuning for better accuracy
+* Build real-time fraud detection system
+* Develop interactive dashboard using Streamlit or Power BI
 
 
 
