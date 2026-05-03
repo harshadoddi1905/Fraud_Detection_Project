@@ -1,12 +1,41 @@
-# Fraud Detection using Anomaly Detection
+# Fraud Detection using Machine Learning
 
-## Project Overview
-This project focuses on detecting fraudulent transactions using machine learning.
-An **unsupervised anomaly detection model (Isolation Forest)** is used to identify suspicious transactions based on patterns in the data.
+# Project Overview
+
+This project detects fraudulent transactions using both:
+
+* Isolation Forest (unsupervised anomaly detection)
+* Logistic Regression (supervised classification)
+
+The dataset is highly imbalanced (~1.5% fraud), so the focus is on optimizing precision and recall instead of accuracy.
 
 
+# Approach
 
-## Tools & Technologies
+* Data preprocessing and feature scaling (StandardScaler)
+* Anomaly detection using Isolation Forest
+* Probability-based classification using Logistic Regression
+* Threshold tuning to balance fraud detection vs false positives
+
+
+# Final Results (Logistic Regression - Threshold = 0.8)
+
+* Precision (Fraud): **0.13**
+* Recall (Fraud): **0.40**
+* F1 Score: **0.19**
+
+Confusion Matrix:
+[[9435  414]
+ [  91   60]]
+
+
+# Key Insight
+
+Lower thresholds increased fraud detection but caused too many false positives.
+Threshold = 0.8 provided the best trade-off for practical use.
+
+
+# Tools & Technologies
 * Python
 * Pandas & NumPy
 * Scikit-learn
@@ -30,7 +59,7 @@ Fraud_Detection_Project/
 │   ├── fraud_distribution.png
 │   └── risk_score.png
 ├── README.md
-```
+
 
 
 ## Key Features
@@ -101,16 +130,16 @@ python scripts/fraud_detection.py
 
 
 ## Output
-* `fraud_results.csv` → Contains predictions and risk scores
-* Dashboard images → Visual analysis
+* fraud_results.csv` → Contains transaction predictions and risk scores
+* Dashboard images → Visualizations of fraud patterns and risk distribution
 
 
 
 ## Future Improvements
-* Use advanced models (Random Forest, XGBoost)
-* Hyperparameter tuning
-* Real-time fraud detection system
-* Dashboard using Power BI or Streamlit
+- Implement advanced models (Random Forest, XGBoost)
+- Perform hyperparameter tuning for better accuracy
+- Build real-time fraud detection system
+- Develop interactive dashboard using Streamlit or Power BI
 
 
 
