@@ -138,6 +138,8 @@ Fraud detection is an imbalanced problem, so recall is more important than accur
 ![Fraud Distribution](dashboard/fraud_distribution.png)
 ###  Risk Score Distribution
 ![Risk Score](dashboard/risk_score.png)
+### ROC Curve
+![ROC Curve](dashboard/roc_curve.png)
 
 
 
