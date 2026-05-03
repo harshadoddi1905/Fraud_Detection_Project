@@ -128,7 +128,9 @@ python scripts/fraud_detection.py
   * Accuracy
   * Precision
   * Recall
+  * F1 Score
   * Confusion Matrix
+  * ROC-AUC Score
 Fraud detection is an imbalanced problem, so recall is more important than accuracy.
 
 
@@ -144,10 +146,11 @@ Fraud detection is an imbalanced problem, so recall is more important than accur
 
 
 ## Key Insights
-* High-value transactions are more likely to be fraudulent
-* Transactions with high velocity (frequency) show higher risk
-* Only a small percentage of transactions are fraud (imbalanced data)
-* Risk score helps prioritize suspicious transactions
+* Fraud detection is a highly imbalanced problem (~0.17% fraud)
+* Recall is more important than accuracy in fraud detection
+* Lower threshold increases fraud detection but raises false positives
+* Logistic Regression with threshold tuning improved recall significantly
+* ROC-AUC score (~0.74) indicates reasonable model performance
 
 
 
