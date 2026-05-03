@@ -62,6 +62,7 @@ Fraud_Detection_Project/
 ├── dashboard/
 │   ├── fraud_distribution.png
 │   └── risk_score.png
+|   └── roc_curve.png  
 ├── README.md
 ```
 
